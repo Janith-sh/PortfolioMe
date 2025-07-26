@@ -1,100 +1,118 @@
+// pages/index.js
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 via-slate-100 to-blue-50">
+      {/* Header */}
+      <header className="bg-white/90 backdrop-blur-md border-b border-gray-300 sticky top-0 z-50 shadow-md">
+        <nav className="container mx-auto flex justify-between items-center px-6 py-4">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-slate-700 to-blue-700 bg-clip-text text-transparent">
+            Janith S Viduranga
+          </h1>
+          <div className="hidden md:flex space-x-8">
+            <a href="/" className="text-blue-700 font-semibold border-b-2 border-blue-700">Home</a>
+            <a href="/projects" className="text-gray-600 hover:text-blue-700 transition-colors duration-300 font-medium">Projects</a>
+            <a href="/skills" className="text-gray-600 hover:text-blue-700 transition-colors duration-300 font-medium">Skills</a>
+            <a href="/contact" className="text-gray-600 hover:text-blue-700 transition-colors duration-300 font-medium">Contact</a>
+          </div>
+          
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button className="text-gray-600 hover:text-blue-700">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </nav>
+      </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Main Content */}
+      <main className="flex-1 flex items-center justify-center px-6 py-12">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Section: Text Content */}
+            <div className="space-y-8">
+              <div className="space-y-6">
+                <p className="text-lg text-blue-700 font-medium animate-fade-in-up">
+                  Hello! Welcome to my portfolio
+                </p>
+                <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+                  I'M{" "}
+                    <span className="text-black">
+                    JANITH SHAN
+                    </span>
+                </h1>
+                <p className="text-xl text-gray-700 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+                  Full Stack Developer who creates modern web applications with clean code and beautiful designs.
+                </p>
+              </div>
+
+              {/* Skills Preview */}
+              <div className="flex flex-wrap gap-3 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+                {["React.js", "Next.js", "Node.js", "MongoDB", "Tailwind CSS"].map((tech, index) => (
+                  <span 
+                    key={index}
+                    className="px-4 py-2 bg-white/80 backdrop-blur-sm text-gray-700 rounded-full text-sm font-medium border border-gray-300 hover:shadow-md hover:scale-105 transition-all duration-300 hover:bg-slate-100 hover:border-blue-400"
+                    style={{ animationDelay: `${0.8 + index * 0.1}s` }}
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: '1.3s' }}>
+                <a 
+                  href="/contact"
+                  className="bg-gradient-to-r from-slate-700 to-blue-700 text-white px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 hover:scale-105 text-center"
+                >
+                  Contact Me
+                </a>
+                <a 
+                  href="/projects"
+                  className="bg-white/80 backdrop-blur-sm text-gray-700 px-8 py-4 rounded-2xl font-semibold border border-gray-300 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 text-center hover:scale-105 hover:bg-slate-100 hover:border-blue-400"
+                >
+                  View My Work
+                </a>
+              </div>
+            </div>
+
+            {/* Right Section: Image */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="relative animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
+                <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105 group border border-gray-300">
+                  <Image
+                    src="/profile2.jpg"
+                    alt="Janith S Viduranga - Full Stack Developer"
+                    width={400}
+                    height={400}
+                    className="rounded-2xl w-full h-auto group-hover:scale-105 transition-transform duration-500"
+                    priority
+                  />
+                  
+                  {/* Subtle floating indicator */}
+                  <div className="absolute -top-2 -right-2 w-4 h-4 bg-blue-600 rounded-full animate-pulse shadow-lg"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-8 border-t border-gray-800">
+        <div className="container mx-auto text-center px-6">
+          <p className="text-gray-400">
+            &copy; {new Date().getFullYear()} Janith S Viduranga. All Rights Reserved.
+          </p>
+          <div className="mt-4 flex justify-center space-x-6">
+            <a href="https://github.com" className="text-gray-400 hover:text-white transition-colors">GitHub</a>
+            <a href="https://linkedin.com" className="text-gray-400 hover:text-white transition-colors">LinkedIn</a>
+            <a href="https://twitter.com" className="text-gray-400 hover:text-white transition-colors">Twitter</a>
+          </div>
+        </div>
       </footer>
     </div>
   );
