@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from 'react';
+import { contactAPI } from '@/utils/api';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -25,11 +26,11 @@ export default function Contact() {
     setIsSubmitting(true);
     
     try {
-      // Simulate form submission - replace with actual API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await contactAPI.submit(formData);
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
+      console.error('Contact form error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);

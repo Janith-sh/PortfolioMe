@@ -1,5 +1,6 @@
 // components/AddProjectForm.js
 import { useState } from 'react';
+import { projectAPI } from '@/utils/api';
 
 export default function AddProjectForm({ onProjectAdded }) {
   const [title, setTitle] = useState('');
@@ -13,40 +14,27 @@ export default function AddProjectForm({ onProjectAdded }) {
     
     // Create new project object
     const newProject = {
-      _id: Date.now().toString(), // Temporary ID
       title,
       description,
       link,
       technologies: technologies.split(',').map(tech => tech.trim()),
       status,
-      image: '/project-placeholder.jpg'
     };
 
     try {
-      const response = await fetch('/api/projects/create', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newProject),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        onProjectAdded(data.project);
-      } else {
-        // For now, just add to local state
-        onProjectAdded(newProject);
-      }
+      const data = await projectAPI.create(newProject);
+      onProjectAdded(data.project);
+      
+      // Reset form
+      setTitle('');
+      setDescription('');
+      setLink('');
+      setTechnologies('');
+      setStatus('In Progress');
     } catch (error) {
-      // Fallback: add to local state
-      onProjectAdded(newProject);
+      console.error('Error creating project:', error);
+      alert('Error creating project: ' + error.message);
     }
-
-    // Reset form
-    setTitle('');
-    setDescription('');
-    setLink('');
-    setTechnologies('');
-    setStatus('In Progress');
   };
 
   return (
@@ -60,7 +48,7 @@ export default function AddProjectForm({ onProjectAdded }) {
           placeholder="Enter project title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+          className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-gray-900 placeholder-gray-500"
           required
         />
       </div>
@@ -74,7 +62,7 @@ export default function AddProjectForm({ onProjectAdded }) {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           rows={4}
-          className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
+          className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none text-gray-900 placeholder-gray-500"
           required
         />
       </div>
@@ -88,7 +76,7 @@ export default function AddProjectForm({ onProjectAdded }) {
           placeholder="https://github.com/username/project"
           value={link}
           onChange={(e) => setLink(e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+          className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-gray-900 placeholder-gray-500"
           required
         />
       </div>
@@ -102,7 +90,7 @@ export default function AddProjectForm({ onProjectAdded }) {
           placeholder="React, Node.js, MongoDB, Tailwind CSS"
           value={technologies}
           onChange={(e) => setTechnologies(e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+          className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-gray-900 placeholder-gray-500"
           required
         />
       </div>
@@ -114,7 +102,7 @@ export default function AddProjectForm({ onProjectAdded }) {
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+          className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-gray-900"
         >
           <option value="In Progress">In Progress</option>
           <option value="Completed">Completed</option>

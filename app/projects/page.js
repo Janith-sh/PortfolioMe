@@ -3,67 +3,11 @@
 
 import { useState, useEffect } from "react";
 import AddProjectForm from "@/components/AddProjectsForm";
+import { projectAPI } from "@/utils/api";
 
 export default function Projects() {
-  // Sample projects data - replace with real API data later
-  const sampleProjects = [
-    {
-      _id: '1',
-      title: 'E-Commerce Platform',
-      description: 'A full-stack e-commerce solution built with Next.js, featuring user authentication, payment integration, and admin dashboard.',
-      link: 'https://github.com',
-      technologies: ['Next.js', 'MongoDB', 'Stripe', 'Tailwind CSS'],
-      image: '/project1.jpg',
-      status: 'Completed'
-    },
-    {
-      _id: '2',
-      title: 'Task Management App',
-      description: 'A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.',
-      link: 'https://github.com',
-      technologies: ['React', 'Node.js', 'Socket.io', 'PostgreSQL'],
-      image: '/project2.jpg',
-      status: 'Completed'
-    },
-    {
-      _id: '3',
-      title: 'Weather Dashboard',
-      description: 'A responsive weather application that provides real-time weather data, forecasts, and interactive maps using external APIs.',
-      link: 'https://github.com',
-      technologies: ['React', 'Weather API', 'Chart.js', 'CSS3'],
-      image: '/project3.jpg',
-      status: 'Completed'
-    },
-    {
-      _id: '4',
-      title: 'Social Media Platform',
-      description: 'A modern social media platform with posts, comments, likes, and real-time messaging functionality.',
-      link: 'https://github.com',
-      technologies: ['MERN Stack', 'Socket.io', 'AWS S3', 'JWT'],
-      image: '/project4.jpg',
-      status: 'In Progress'
-    },
-    {
-      _id: '5',
-      title: 'Portfolio Website',
-      description: 'A modern, responsive portfolio website showcasing projects and skills with smooth animations and modern UI design.',
-      link: 'https://github.com',
-      technologies: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
-      image: '/project5.jpg',
-      status: 'Completed'
-    },
-    {
-      _id: '6',
-      title: 'Learning Management System',
-      description: 'An educational platform for online courses with video streaming, progress tracking, and interactive quizzes.',
-      link: 'https://github.com',
-      technologies: ['Next.js', 'MongoDB', 'Video.js', 'Stripe'],
-      image: '/project6.jpg',
-      status: 'In Progress'
-    }
-  ];
-
-  const [projects, setProjects] = useState(sampleProjects);
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('All');
   const [showPasswordModal, setShowPasswordModal] = useState(false);
@@ -74,21 +18,21 @@ export default function Projects() {
   const ADMIN_PASSWORD = 'password';
 
   useEffect(() => {
-    // This will be replaced with actual API call later
     const fetchProjects = async () => {
       try {
-        const response = await fetch('/api/projects');
-        const data = await response.json();
-        if (data.success) {
-          setProjects(data.projects);
-        }
+        setLoading(true);
+        const data = await projectAPI.getAll();
+        setProjects(data.projects);
       } catch (error) {
-        // For now, use sample data
-        console.log('Using sample data');
+        console.error('Error fetching projects:', error);
+        // Set empty array if API fails
+        setProjects([]);
+      } finally {
+        setLoading(false);
       }
     };
 
-    // fetchProjects();
+    fetchProjects();
   }, []);
 
   const handleProjectAdded = (newProject) => {
@@ -273,8 +217,16 @@ export default function Projects() {
           )}
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-            {filteredProjects.map((project, index) => (
+          {loading ? (
+            <div className="flex justify-center items-center py-20">
+              <div className="text-center">
+                <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
+                <p className="text-gray-600">Loading projects...</p>
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+              {filteredProjects.map((project, index) => (
               <div 
                 key={project._id}
                 className="bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:transform hover:-translate-y-2 group border border-gray-300"
@@ -337,10 +289,11 @@ export default function Projects() {
                 </div>
               </div>
             ))}
-          </div>
+            </div>
+          )}
 
           {/* Empty State */}
-          {filteredProjects.length === 0 && (
+          {!loading && filteredProjects.length === 0 && (
             <div className="text-center py-16">
               <div className="text-6xl mb-4">📝</div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">No Projects Found</h3>
