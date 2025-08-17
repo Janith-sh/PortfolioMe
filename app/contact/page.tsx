@@ -26,7 +26,8 @@ export default function Contact() {
     setIsSubmitting(true);
     
     try {
-      await contactAPI.submit(formData);
+      const response = await contactAPI.submit(formData);
+      console.log('Contact form submitted successfully:', response);
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
@@ -149,7 +150,16 @@ export default function Contact() {
               
               {submitStatus === 'success' && (
                 <div className="mb-6 p-4 bg-green-100 border border-green-300 text-green-700 rounded-xl">
-                  Thank you! Your message has been sent successfully.
+                  <div className="flex items-center">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div>
+                      <strong>Thank you!</strong> Your message has been sent successfully.
+                      <br />
+                      <small>I'll get back to you within 24-48 hours.</small>
+                    </div>
+                  </div>
                 </div>
               )}
               

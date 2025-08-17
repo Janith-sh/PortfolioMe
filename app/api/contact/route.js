@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import Contact from '@/models/Contact';
+import { sendContactEmail, sendConfirmationEmail } from '@/lib/email';
 
 export async function POST(request) {
   try {
@@ -29,10 +30,37 @@ export async function POST(request) {
     // Save to database
     await contact.save();
 
+    // Send email notification to you
+    try {
+      await sendContactEmail({
+        name: name.trim(),
+        email: email.trim(),
+        subject: subject.trim(),
+        message: message.trim(),
+      });
+      console.log('Contact notification email sent successfully');
+    } catch (emailError) {
+      console.error('Failed to send contact notification email:', emailError);
+      // Continue execution even if email fails
+    }
+
+    // Send confirmation email to the user (optional)
+    try {
+      await sendConfirmationEmail({
+        name: name.trim(),
+        email: email.trim(),
+        subject: subject.trim(),
+      });
+      console.log('Confirmation email sent to user');
+    } catch (confirmationError) {
+      console.error('Failed to send confirmation email:', confirmationError);
+      // Continue execution even if confirmation email fails
+    }
+
     return NextResponse.json(
       { 
         success: true,
-        message: 'Contact form submitted successfully',
+        message: 'Contact form submitted successfully and email sent',
         contactId: contact._id 
       },
       { status: 201 }
