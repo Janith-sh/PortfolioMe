@@ -311,7 +311,7 @@ export default function Contact() {
       <footer className="bg-gray-900 text-white py-8 border-t border-gray-800">
         <div className="container mx-auto text-center px-6">
           <p className="text-gray-400">
-            &copy; {new Date().getFullYear()} Janith S Viduranga. All Rights Reserved.
+            &copy; 2025 Janith S Viduranga. All Rights Reserved.
           </p>
           <div className="mt-4 flex justify-center space-x-6">
             <a href="#" className="text-gray-400 hover:text-white transition-colors">LinkedIn</a>

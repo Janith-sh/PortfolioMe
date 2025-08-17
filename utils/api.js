@@ -79,3 +79,53 @@ export const contactAPI = {
     return apiCall(`/contact?${searchParams}`);
   },
 };
+
+// Skills API functions
+export const skillsAPI = {
+  // Get all skill categories
+  getAll: (params = {}) => {
+    const searchParams = new URLSearchParams(params);
+    return apiCall(`/skills?${searchParams}`);
+  },
+
+  // Get all categories (simplified)
+  getCategories: () => apiCall('/skills/categories'),
+
+  // Create new category
+  createCategory: (categoryData) => apiCall('/skills/categories', {
+    method: 'POST',
+    body: JSON.stringify(categoryData),
+  }),
+
+  // Get specific category
+  getCategory: (id) => apiCall(`/skills/categories/${id}`),
+
+  // Update category
+  updateCategory: (id, categoryData) => apiCall(`/skills/categories/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(categoryData),
+  }),
+
+  // Add skill to category
+  addSkill: (categoryId, skillData) => apiCall(`/skills/categories/${categoryId}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+      action: 'add-skill',
+      skill: skillData,
+    }),
+  }),
+
+  // Remove skill from category
+  removeSkill: (categoryId, skillName) => apiCall(`/skills/categories/${categoryId}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+      action: 'remove-skill',
+      skill: { name: skillName },
+    }),
+  }),
+
+  // Delete category
+  deleteCategory: (id) => apiCall(`/skills/categories/${id}`, {
+    method: 'DELETE',
+  }),
+};

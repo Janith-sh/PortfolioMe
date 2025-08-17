@@ -1,44 +1,12 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { skillsAPI } from '@/utils/api';
 
 export default function Skills() {
-    const initialSkills = [
-      {
-        id: 1,
-        category: "Frontend Development",
-        items: [
-          { name: "HTML5", color: "bg-orange-500" },
-          { name: "CSS3", color: "bg-blue-500" },
-          { name: "JavaScript", color: "bg-yellow-500" },
-          { name: "React.js", color: "bg-cyan-500" },
-          { name: "Next.js", color: "bg-gray-800" },
-          { name: "Tailwind CSS", color: "bg-teal-500" }
-        ]
-      },
-      {
-        id: 2,
-        category: "Backend Development",
-        items: [
-          { name: "Node.js", color: "bg-green-600" },
-          { name: "MongoDB", color: "bg-green-500" },
-          { name: "Express.js", color: "bg-gray-700" },
-          { name: "API Development", color: "bg-purple-500" }
-        ]
-      },
-      {
-        id: 3,
-        category: "Tools & Technologies",
-        items: [
-          { name: "Git", color: "bg-red-500" },
-          { name: "GitHub", color: "bg-gray-800" },
-          { name: "VS Code", color: "bg-blue-600" },
-          { name: "Responsive Design", color: "bg-pink-500" }
-        ]
-      }
-    ];
-
-    const [skills, setSkills] = useState(initialSkills);
+    // Remove initial skills since we'll fetch from API
+    const [skills, setSkills] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [showAddCategoryForm, setShowAddCategoryForm] = useState(false);
     const [showAddSkillForm, setShowAddSkillForm] = useState(false);
     const [selectedCategoryId, setSelectedCategoryId] = useState(null);
@@ -69,6 +37,25 @@ export default function Skills() {
       { name: 'Emerald', value: 'bg-emerald-500' }
     ];
 
+    // Fetch skills from API
+    useEffect(() => {
+      const fetchSkills = async () => {
+        try {
+          setLoading(true);
+          const data = await skillsAPI.getAll();
+          setSkills(data.skillCategories);
+        } catch (error) {
+          console.error('Error fetching skills:', error);
+          // Set empty array if API fails
+          setSkills([]);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchSkills();
+    }, []);
+
     const handleAdminClick = () => {
       if (isAuthenticated) {
         setShowAddCategoryForm(true);
@@ -97,37 +84,50 @@ export default function Skills() {
       setPasswordError('');
     };
 
-    const handleAddCategory = (e) => {
+    const handleAddCategory = async (e) => {
       e.preventDefault();
       if (newCategory.trim()) {
-        const newSkillCategory = {
-          id: Date.now(),
-          category: newCategory.trim(),
-          items: []
-        };
-        setSkills([...skills, newSkillCategory]);
-        setNewCategory('');
-        setShowAddCategoryForm(false);
+        try {
+          const newSkillCategory = await skillsAPI.createCategory({
+            category: newCategory.trim(),
+            order: skills.length + 1
+          });
+          setSkills([...skills, newSkillCategory.category]);
+          setNewCategory('');
+          setShowAddCategoryForm(false);
+        } catch (error) {
+          console.error('Error adding category:', error);
+          // Handle error (you could show a toast notification here)
+        }
       }
     };
 
-    const handleAddSkill = (e) => {
+    const handleAddSkill = async (e) => {
       e.preventDefault();
       if (newSkillName.trim() && selectedCategoryId) {
-        const updatedSkills = skills.map(skillCategory => {
-          if (skillCategory.id === selectedCategoryId) {
-            return {
-              ...skillCategory,
-              items: [...skillCategory.items, { name: newSkillName.trim(), color: newSkillColor }]
-            };
-          }
-          return skillCategory;
-        });
-        setSkills(updatedSkills);
-        setNewSkillName('');
-        setNewSkillColor('bg-blue-500');
-        setShowAddSkillForm(false);
-        setSelectedCategoryId(null);
+        try {
+          const updatedCategory = await skillsAPI.addSkill(selectedCategoryId, {
+            name: newSkillName.trim(),
+            color: newSkillColor
+          });
+          
+          // Update the local state
+          const updatedSkills = skills.map(skillCategory => {
+            if (skillCategory._id === selectedCategoryId) {
+              return updatedCategory.category;
+            }
+            return skillCategory;
+          });
+          
+          setSkills(updatedSkills);
+          setNewSkillName('');
+          setNewSkillColor('bg-blue-500');
+          setShowAddSkillForm(false);
+          setSelectedCategoryId(null);
+        } catch (error) {
+          console.error('Error adding skill:', error);
+          // Handle error (you could show a toast notification here)
+        }
       }
     };
 
@@ -191,62 +191,72 @@ export default function Skills() {
               </div>
             </div>
 
-            {/* Skills Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-              {skills.map((skillCategory, categoryIndex) => (
-                <div 
-                  key={skillCategory.id}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-300 hover:transform hover:-translate-y-2"
-                >
-                  <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-2xl font-bold text-gray-900">
-                      {skillCategory.category}
-                    </h3>
-                    {isAuthenticated && (
-                      <button
-                        onClick={() => handleAddSkillToCategory(skillCategory.id)}
-                        className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition-colors"
-                        title="Add skill to this category"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
-                      </button>
-                    )}
-                  </div>
-                  <div className="flex flex-wrap gap-3 justify-center">
-                    {skillCategory.items.map((skill, skillIndex) => (
-                      <div 
-                        key={skillIndex} 
-                        className={`${skill.color} text-white px-4 py-2 rounded-full font-medium text-sm hover:shadow-lg transform hover:scale-105 transition-all duration-300`}
-                      >
-                        {skill.name}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Additional Skills Section */}
-            <div className="mt-16 text-center">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-gray-300">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Always Learning</h3>
-                <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
-                  Technology evolves rapidly, and I'm committed to continuous learning and staying updated with the latest trends and best practices in web development.
-                </p>
-                <div className="flex flex-wrap justify-center gap-3">
-                  {["TypeScript", "Docker", "AWS", "GraphQL", "Testing", "UI/UX Design"].map((tech, index) => (
-                    <span 
-                      key={index}
-                      className="px-4 py-2 bg-gradient-to-r from-slate-600 to-blue-600 text-white rounded-full text-sm font-medium hover:shadow-lg transition-all duration-300 hover:scale-105"
+            {/* Loading state */}
+            {loading ? (
+              <div className="flex justify-center items-center py-12">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-700"></div>
+                <span className="ml-4 text-gray-600">Loading skills...</span>
+              </div>
+            ) : (
+              <>
+                {/* Skills Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+                  {skills.map((skillCategory, categoryIndex) => (
+                    <div 
+                      key={skillCategory._id}
+                      className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-300 hover:transform hover:-translate-y-2"
                     >
-                      {tech}
-                    </span>
+                      <div className="flex justify-between items-center mb-6">
+                        <h3 className="text-2xl font-bold text-gray-900">
+                          {skillCategory.category}
+                        </h3>
+                        {isAuthenticated && (
+                          <button
+                            onClick={() => handleAddSkillToCategory(skillCategory._id)}
+                            className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition-colors"
+                            title="Add skill to this category"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                          </button>
+                        )}
+                      </div>
+                      <div className="flex flex-wrap gap-3 justify-center">
+                        {skillCategory.items.map((skill, skillIndex) => (
+                          <div 
+                            key={skillIndex} 
+                            className={`${skill.color} text-white px-4 py-2 rounded-full font-medium text-sm hover:shadow-lg transform hover:scale-105 transition-all duration-300`}
+                          >
+                            {skill.name}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   ))}
                 </div>
-              </div>
-            </div>
+
+                {/* Additional Skills Section */}
+                <div className="mt-16 text-center">
+                  <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-gray-300">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-6">Always Learning</h3>
+                    <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
+                      Technology evolves rapidly, and I'm committed to continuous learning and staying updated with the latest trends and best practices in web development.
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-3">
+                      {["TypeScript", "Docker", "AWS", "GraphQL", "Testing", "UI/UX Design"].map((tech, index) => (
+                        <span 
+                          key={index}
+                          className="px-4 py-2 bg-gradient-to-r from-slate-600 to-blue-600 text-white rounded-full text-sm font-medium hover:shadow-lg transition-all duration-300 hover:scale-105"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </main>
 
@@ -412,7 +422,7 @@ export default function Skills() {
         <footer className="bg-gray-900 text-white py-8 border-t border-gray-800">
           <div className="container mx-auto text-center px-6">
             <p className="text-gray-400">
-              &copy; {new Date().getFullYear()} Janith S Viduranga. All Rights Reserved.
+              &copy; 2025 Janith S Viduranga. All Rights Reserved.
             </p>
             <div className="mt-4 flex justify-center space-x-6">
               <a href="#" className="text-gray-400 hover:text-white transition-colors">LinkedIn</a>

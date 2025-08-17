@@ -84,7 +84,7 @@ export default function Home() {
               <div className="relative animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
                 <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105 group border border-gray-300">
                   <Image
-                    src="/profile2.jpg"
+                    src="/profile3.jpg"
                     alt="Janith S Viduranga - Full Stack Developer"
                     width={400}
                     height={400}
@@ -105,7 +105,7 @@ export default function Home() {
       <footer className="bg-gray-900 text-white py-8 border-t border-gray-800">
         <div className="container mx-auto text-center px-6">
           <p className="text-gray-400">
-            &copy; {new Date().getFullYear()} Janith S Viduranga. All Rights Reserved.
+            &copy; 2025 Janith S Viduranga. All Rights Reserved.
           </p>
           <div className="mt-4 flex justify-center space-x-6">
             <a href="https://github.com" className="text-gray-400 hover:text-white transition-colors">GitHub</a>
