@@ -306,11 +306,33 @@ export default function Contact() {
                 <p className="text-gray-700 mb-4">
                   I'm currently available for freelance projects and full-time opportunities.
                 </p>
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-gray-600 mb-6">
                   <p>• Response time: Within 24 hours</p>
                   <p>• Time zone: PST (UTC-5.5)</p>
                   <p>• Preferred contact: Email</p>
                 </div>
+                
+                {/* Download CV Button */}
+                <a 
+                  href="https://drive.google.com/uc?export=download&id=1ncW7EdPosN76pcRrJPBYM0mNWdt8RMOd" 
+                  download="Janith_Viduranga_CV.pdf"
+                  className="inline-flex items-center justify-center w-full bg-gradient-to-r from-slate-700 to-blue-700 text-white py-3 px-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group"
+                >
+                  <svg 
+                    className="w-5 h-5 mr-2 group-hover:animate-bounce" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={2} 
+                      d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
+                    />
+                  </svg>
+                  Download CV
+                </a>
               </div>
             </div>
           </div>
