@@ -104,18 +104,18 @@ export default function Contact() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 via-slate-100 to-blue-50">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-indigo-50 to-purple-50">
       {/* Header */}
-      <header className="bg-white/90 backdrop-blur-md border-b border-gray-300 sticky top-0 z-50 shadow-md">
+      <header className="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 shadow-md">
         <nav className="container mx-auto flex justify-between items-center px-6 py-4">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-slate-700 to-blue-700 bg-clip-text text-transparent">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
             Janith S Viduranga
           </h1>
           <div className="hidden md:flex space-x-8">
-            <a href="/" className="text-gray-600 hover:text-blue-700 transition-colors duration-300 font-medium">Home</a>
-            <a href="/projects" className="text-gray-600 hover:text-blue-700 transition-colors duration-300 font-medium">Projects</a>
-            <a href="/skills" className="text-gray-600 hover:text-blue-700 transition-colors duration-300 font-medium">Skills</a>
-            <a href="/contact" className="text-blue-700 font-semibold border-b-2 border-blue-700">Contact</a>
+            <a href="/" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Home</a>
+            <a href="/projects" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Projects</a>
+            <a href="/skills" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Skills</a>
+            <a href="/contact" className="text-indigo-600 font-semibold border-b-2 border-indigo-600">Contact</a>
           </div>
           
           {/* Mobile menu button */}
@@ -134,10 +134,10 @@ export default function Contact() {
         <div className="container mx-auto max-w-6xl">
           {/* Hero Section */}
           <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              Get In <span className="bg-gradient-to-r from-slate-700 to-blue-700 bg-clip-text text-transparent">Touch</span>
+            <h2 className="text-5xl md:text-6xl font-bold text-slate-800 mb-6">
+              Get In <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Touch</span>
             </h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
               Have a project in mind or want to collaborate? I'd love to hear from you. 
               Let's create something amazing together.
             </p>
@@ -145,8 +145,8 @@ export default function Contact() {
 
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-gray-300">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Send Message</h3>
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-slate-200">
+              <h3 className="text-2xl font-bold text-slate-800 mb-6">Send Message</h3>
               
               {submitStatus === 'success' && (
                 <div className="mb-6 p-4 bg-green-100 border border-green-300 text-green-700 rounded-xl">
@@ -172,7 +172,7 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
                       Your Name
                     </label>
                     <input
@@ -181,12 +181,12 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Enter your name"
-                      className="w-full p-3 border border-gray-400 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300"
+                      className="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
                       Email Address
                     </label>
                     <input
@@ -195,14 +195,14 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="Enter your email"
-                      className="w-full p-3 border border-gray-400 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300"
+                      className="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
                       required
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Subject
                   </label>
                   <input
@@ -211,13 +211,13 @@ export default function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder="What's this about?"
-                    className="w-full p-3 border border-gray-400 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300"
+                    className="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Message
                   </label>
                   <textarea
@@ -226,7 +226,7 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="Tell me about your project or idea..."
                     rows={6}
-                    className="w-full p-3 border border-gray-400 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300 resize-none"
+                    className="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 resize-none"
                     required
                   ></textarea>
                 </div>
@@ -234,7 +234,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-slate-700 to-blue-700 text-white py-3 px-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
                   {isSubmitting ? (
                     <span className="flex items-center justify-center">
@@ -256,16 +256,16 @@ export default function Contact() {
               {/* Contact Info Cards */}
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
-                  <div key={index} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300 hover:transform hover:-translate-y-1">
+                  <div key={index} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300 hover:transform hover:-translate-y-1">
                     <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-gradient-to-r from-slate-700 to-blue-700 rounded-xl flex items-center justify-center text-white">
+                      <div className="w-12 h-12 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center text-white">
                         {info.icon}
                       </div>
                       <div>
-                        <h4 className="text-lg font-semibold text-gray-900">{info.title}</h4>
+                        <h4 className="text-lg font-semibold text-slate-800">{info.title}</h4>
                         <a 
                           href={info.link}
-                          className="text-gray-700 hover:text-blue-700 transition-colors duration-300"
+                          className="text-slate-600 hover:text-indigo-600 transition-colors duration-300"
                         >
                           {info.value}
                         </a>
@@ -276,9 +276,9 @@ export default function Contact() {
               </div>
 
               {/* Social Links */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-gray-300">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Connect With Me</h3>
-                <p className="text-gray-700 mb-6">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-slate-200">
+                <h3 className="text-2xl font-bold text-slate-800 mb-6">Connect With Me</h3>
+                <p className="text-slate-600 mb-6">
                   Follow me on social media for updates on my latest projects and tech insights.
                 </p>
                 <div className="flex space-x-4">
@@ -288,7 +288,7 @@ export default function Contact() {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-12 h-12 bg-gray-200 rounded-xl flex items-center justify-center text-gray-600 hover:bg-gradient-to-r hover:from-slate-700 hover:to-blue-700 hover:text-white transition-all duration-300 hover:scale-110"
+                      className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-slate-600 hover:bg-gradient-to-r hover:from-indigo-600 hover:to-purple-600 hover:text-white transition-all duration-300 hover:scale-110"
                       title={social.name}
                     >
                       {social.icon}
@@ -298,15 +298,15 @@ export default function Contact() {
               </div>
 
               {/* Availability Status */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-gray-300">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-slate-200">
                 <div className="flex items-center space-x-3 mb-4">
-                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                  <h3 className="text-xl font-bold text-gray-900">Currently Available</h3>
+                  <div className="w-3 h-3 bg-teal-500 rounded-full animate-pulse"></div>
+                  <h3 className="text-xl font-bold text-slate-800">Currently Available</h3>
                 </div>
-                <p className="text-gray-700 mb-4">
+                <p className="text-slate-600 mb-4">
                   I'm currently available for freelance projects and full-time opportunities.
                 </p>
-                <div className="text-sm text-gray-600 mb-6">
+                <div className="text-sm text-slate-600 mb-6">
                   <p>• Response time: Within 24 hours</p>
                   <p>• Time zone: PST (UTC-5.5)</p>
                   <p>• Preferred contact: Email</p>
@@ -316,7 +316,7 @@ export default function Contact() {
                 <a 
                   href="https://drive.google.com/uc?export=download&id=1ncW7EdPosN76pcRrJPBYM0mNWdt8RMOd" 
                   download="Janith_Viduranga_CV.pdf"
-                  className="inline-flex items-center justify-center w-full bg-gradient-to-r from-slate-700 to-blue-700 text-white py-3 px-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group"
+                  className="inline-flex items-center justify-center w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group"
                 >
                   <svg 
                     className="w-5 h-5 mr-2 group-hover:animate-bounce" 
@@ -340,15 +340,15 @@ export default function Contact() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8 border-t border-gray-800">
+      <footer className="bg-slate-900 text-white py-8 border-t border-slate-800">
         <div className="container mx-auto text-center px-6">
-          <p className="text-gray-400">
+          <p className="text-slate-400">
             &copy; 2025 Janith S Viduranga. All Rights Reserved.
           </p>
           <div className="mt-4 flex justify-center space-x-6">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">LinkedIn</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">GitHub</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">Twitter</a>
+            <a href="#" className="text-slate-400 hover:text-white transition-colors">LinkedIn</a>
+            <a href="#" className="text-slate-400 hover:text-white transition-colors">GitHub</a>
+            <a href="#" className="text-slate-400 hover:text-white transition-colors">Twitter</a>
           </div>
         </div>
       </footer>

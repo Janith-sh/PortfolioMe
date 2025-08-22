@@ -73,23 +73,23 @@ export default function Projects() {
     : projects.filter(project => project.status === selectedFilter);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 via-slate-100 to-blue-50">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-indigo-50 to-purple-50">
       {/* Header */}
-      <header className="bg-white/90 backdrop-blur-md border-b border-gray-300 sticky top-0 z-50 shadow-md">
+      <header className="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 shadow-md">
         <nav className="container mx-auto flex justify-between items-center px-6 py-4">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-slate-700 to-blue-700 bg-clip-text text-transparent">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
             Janith S Viduranga
           </h1>
           <div className="hidden md:flex space-x-8">
-            <a href="/" className="text-gray-600 hover:text-blue-700 transition-colors duration-300 font-medium">Home</a>
-            <a href="/projects" className="text-blue-700 font-semibold border-b-2 border-blue-700">Projects</a>
-            <a href="/skills" className="text-gray-600 hover:text-blue-700 transition-colors duration-300 font-medium">Skills</a>
-            <a href="/contact" className="text-gray-600 hover:text-blue-700 transition-colors duration-300 font-medium">Contact</a>
+            <a href="/" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Home</a>
+            <a href="/projects" className="text-indigo-600 font-semibold border-b-2 border-indigo-600">Projects</a>
+            <a href="/skills" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Skills</a>
+            <a href="/contact" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Contact</a>
           </div>
           
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <button className="text-gray-600 hover:text-blue-700">
+            <button className="text-slate-600 hover:text-indigo-600">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
@@ -103,30 +103,43 @@ export default function Projects() {
         <div className="container mx-auto max-w-7xl">
           {/* Hero Section */}
           <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              My <span className="bg-gradient-to-r from-slate-700 to-blue-700 bg-clip-text text-transparent">Projects</span>
+            <h2 className="text-5xl md:text-6xl font-bold text-slate-800 mb-6">
+              My <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Projects</span>
             </h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
               A showcase of my recent work and projects. Each project represents a unique challenge 
               and demonstrates different aspects of modern web development.
             </p>
           </div>
 
           {/* Filter and Add Button */}
-          <div className="flex flex-col sm:flex-row justify-between items-center mb-12 gap-4">
+          <div className="flex flex-col sm:flex-row justify-between items-center mb-12 gap-6">
             {/* Filter Buttons */}
-            <div className="flex gap-2">
-              {['All', 'Completed', 'In Progress'].map((filter) => (
+            <div className="flex gap-3">
+              {['All', 'Completed', 'In Progress'].map((filter, index) => (
                 <button
                   key={filter}
                   onClick={() => setSelectedFilter(filter)}
-                  className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+                  className={`group relative px-8 py-3 rounded-2xl font-semibold transition-all duration-300 overflow-hidden ${
                     selectedFilter === filter
-                      ? 'bg-gradient-to-r from-slate-700 to-blue-700 text-white shadow-lg'
-                      : 'bg-white/80 backdrop-blur-sm text-gray-700 border border-gray-300 hover:shadow-md hover:scale-105'
+                      ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-xl scale-105'
+                      : 'bg-white/80 backdrop-blur-sm text-slate-700 border border-slate-200 hover:shadow-lg hover:scale-105 hover:border-indigo-300'
                   }`}
+                  style={{
+                    animationDelay: `${index * 100}ms`,
+                    animation: 'slideInDown 0.6s ease-out both'
+                  }}
                 >
-                  {filter}
+                  {/* Shimmer effect for active button */}
+                  {selectedFilter === filter && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                  )}
+                  <span className="relative z-10 flex items-center gap-2">
+                    {selectedFilter === filter && (
+                      <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                    )}
+                    {filter}
+                  </span>
                 </button>
               ))}
             </div>
@@ -134,14 +147,28 @@ export default function Projects() {
             {/* Add Project Button */}
             <button
               onClick={handleAddProjectClick}
-              className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-3 rounded-2xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 hover:scale-105 flex items-center gap-2"
+              className="group relative bg-gradient-to-r from-teal-500 to-purple-500 text-white px-8 py-4 rounded-3xl font-bold shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 hover:scale-105 flex items-center gap-3 overflow-hidden"
+              style={{
+                animation: 'slideInDown 0.6s ease-out both 300ms'
+              }}
             >
-              {isAuthenticated && (
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-              )}
-              + Add Project
+              {/* Button shimmer effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+              <div className="relative z-10 flex items-center gap-3">
+                <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center group-hover:rotate-90 transition-transform duration-300">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
+                </div>
+                <span>Add Project</span>
+                {isAuthenticated && (
+                  <div className="w-5 h-5 bg-white/20 rounded-lg flex items-center justify-center">
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  </div>
+                )}
+              </div>
             </button>
           </div>
 
@@ -150,13 +177,13 @@ export default function Projects() {
             <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
               <div className="bg-white/90 backdrop-blur-md rounded-2xl p-8 max-w-sm w-full shadow-2xl">
                 <div className="text-center mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-r from-slate-700 to-blue-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
                     <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Admin Access Required</h3>
-                  <p className="text-gray-600">Enter the admin password to add new projects</p>
+                  <h3 className="text-2xl font-bold text-slate-800 mb-2">Admin Access Required</h3>
+                  <p className="text-slate-600">Enter the admin password to add new projects</p>
                 </div>
 
                 <form onSubmit={handlePasswordSubmit} className="space-y-4">
@@ -166,7 +193,7 @@ export default function Projects() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Enter admin password"
-                      className="w-full p-3 border border-gray-400 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-300"
+                      className="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
                       autoFocus
                       required
                     />
@@ -182,13 +209,13 @@ export default function Projects() {
                     <button
                       type="button"
                       onClick={handlePasswordModalClose}
-                      className="flex-1 bg-gray-200 text-gray-700 py-3 px-4 rounded-xl font-medium hover:bg-gray-300 transition-colors"
+                      className="flex-1 bg-slate-100 text-slate-700 py-3 px-4 rounded-xl font-medium hover:bg-slate-200 transition-colors"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="flex-1 bg-gradient-to-r from-slate-700 to-blue-700 text-white py-3 px-4 rounded-xl font-medium hover:shadow-lg transition-all duration-300"
+                      className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-4 rounded-xl font-medium hover:shadow-lg transition-all duration-300"
                     >
                       Access
                     </button>
@@ -203,10 +230,10 @@ export default function Projects() {
             <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
               <div className="bg-white/90 backdrop-blur-md rounded-2xl p-8 max-w-md w-full shadow-2xl">
                 <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-2xl font-bold text-gray-900">Add New Project</h3>
+                  <h3 className="text-2xl font-bold text-slate-800">Add New Project</h3>
                   <button
                     onClick={() => setShowAddForm(false)}
-                    className="text-gray-500 hover:text-gray-700 text-2xl"
+                    className="text-slate-500 hover:text-slate-700 text-2xl"
                   >
                     ×
                   </button>
@@ -220,71 +247,145 @@ export default function Projects() {
           {loading ? (
             <div className="flex justify-center items-center py-20">
               <div className="text-center">
-                <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
-                <p className="text-gray-600">Loading projects...</p>
+                <div className="relative">
+                  <div className="w-16 h-16 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mx-auto mb-4"></div>
+                  <div className="w-12 h-12 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin mx-auto mb-4 absolute top-2 left-1/2 transform -translate-x-1/2" style={{animationDirection: 'reverse', animationDuration: '1.5s'}}></div>
+                </div>
+                <p className="text-slate-600 font-medium animate-pulse">Loading amazing projects...</p>
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-8">
               {filteredProjects.map((project, index) => (
               <div 
                 key={project._id}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:transform hover:-translate-y-2 group border border-gray-300"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="group relative bg-gradient-to-br from-white/90 via-white/85 to-gray-50/90 backdrop-blur-xl rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:transform hover:-translate-y-3 hover:scale-[1.02] border border-white/20 hover:border-blue-200/50 project-card"
+                style={{ 
+                  animationDelay: `${index * 150}ms`,
+                  animation: 'fadeInUp 0.8s ease-out both'
+                }}
               >
-                {/* Project Image Placeholder */}
-                <div className="h-48 bg-gradient-to-br from-slate-500 to-blue-600 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                  <div className="absolute top-4 right-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                {/* Floating particles effect */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                  <div className="absolute top-4 right-4 w-2 h-2 bg-blue-400/20 rounded-full animate-pulse delay-1000"></div>
+                  <div className="absolute top-8 left-6 w-1 h-1 bg-purple-400/20 rounded-full animate-pulse delay-2000"></div>
+                  <div className="absolute bottom-6 right-8 w-1.5 h-1.5 bg-teal-400/20 rounded-full animate-pulse delay-500"></div>
+                </div>
+
+                {/* Animated background gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50/20 via-purple-50/20 to-teal-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                {/* Project Image Section */}
+                <div className="relative h-52 bg-gradient-to-br from-slate-600 via-blue-600 to-purple-700 overflow-hidden">
+                  {/* Animated mesh background */}
+                  <div className="absolute inset-0 opacity-30">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                  </div>
+                  
+                  {/* Status badge */}
+                  <div className="absolute top-4 right-4 z-10">
+                    <span className={`px-4 py-2 rounded-2xl text-xs font-semibold backdrop-blur-md shadow-lg transition-all duration-300 hover:scale-110 ${
                       project.status === 'Completed' 
-                        ? 'bg-green-500 text-white' 
-                        : 'bg-orange-500 text-white'
+                        ? 'bg-emerald-500/90 text-white border border-emerald-300/50' 
+                        : 'bg-amber-500/90 text-white border border-amber-300/50'
                     }`}>
-                      {project.status}
+                      <div className="flex items-center gap-2">
+                        <div className={`w-2 h-2 rounded-full ${
+                          project.status === 'Completed' ? 'bg-emerald-200 animate-pulse' : 'bg-amber-200 animate-pulse'
+                        }`}></div>
+                        {project.status}
+                      </div>
                     </span>
                   </div>
+
+                  {/* Project icon with animation */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-white/80 text-6xl">🚀</div>
+                    <div className="relative group-hover:scale-110 transition-transform duration-300">
+                      <div className="text-white/90 text-7xl filter drop-shadow-lg group-hover:animate-bounce">🚀</div>
+                      <div className="absolute inset-0 bg-white/10 rounded-full animate-ping delay-1000"></div>
+                    </div>
                   </div>
+
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
                 </div>
 
                 {/* Project Content */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-700 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-700 mb-4 leading-relaxed">
+                <div className="relative z-10 p-8">
+                  <div className="flex items-start gap-3 mb-4">
+                    {/* Project type icon */}
+                    <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 mt-1">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                      </svg>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold bg-gradient-to-r from-slate-800 via-indigo-700 to-purple-700 bg-clip-text text-transparent mb-2 group-hover:scale-105 transition-transform duration-300">
+                        {project.title}
+                      </h3>
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-1.5 h-1.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full animate-pulse"></div>
+                        <span className="text-sm font-medium text-slate-600">
+                          {project.technologies.length} technolog{project.technologies.length !== 1 ? 'ies' : 'y'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p className="text-slate-600 mb-6 leading-relaxed text-sm">
                     {project.description}
                   </p>
 
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  {/* Technologies with enhanced styling */}
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {project.technologies.map((tech, techIndex) => (
                       <span 
                         key={techIndex}
-                        className="px-3 py-1 bg-slate-100 text-slate-700 text-xs rounded-full font-medium"
+                        className="group/tech px-3 py-2 bg-gradient-to-r from-slate-50 to-indigo-50 text-slate-700 text-xs rounded-xl font-semibold border border-slate-200 hover:shadow-md hover:scale-110 hover:-translate-y-1 transition-all duration-300 cursor-pointer relative overflow-hidden"
+                        style={{
+                          animationDelay: `${(index * 150) + (techIndex * 50)}ms`,
+                          animation: 'slideInUp 0.6s ease-out both'
+                        }}
                       >
-                        {tech}
+                        {/* Shimmer effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover/tech:translate-x-full transition-transform duration-500"></div>
+                        <span className="relative z-10">{tech}</span>
                       </span>
                     ))}
                   </div>
 
-                  {/* Action Buttons */}
-                  <div className="flex gap-3">
-                    <a 
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 bg-gradient-to-r from-slate-700 to-blue-700 text-white py-2 px-4 rounded-xl font-medium text-center hover:shadow-lg transition-all duration-300 hover:scale-105"
-                    >
-                      View Project
-                    </a>
-                    <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded-xl hover:bg-gray-300 transition-colors">
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                      </svg>
-                    </button>
+                  /* Action Buttons with enhanced styling */
+                            <div className="flex gap-3">
+                            <a 
+                              href={project.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="group/btn flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-6 rounded-2xl font-semibold text-center hover:shadow-xl transition-all duration-300 hover:scale-105 hover:-translate-y-1 relative overflow-hidden"
+                            >
+                              {/* Button shimmer effect */}
+                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
+                              <div className="relative z-10 flex items-center justify-center gap-2">
+                              <span>View Project</span>
+                              <svg className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                              </svg>
+                              </div>
+                            </a>
+                            <button className="group/fav p-3 bg-gradient-to-r from-slate-100 to-slate-50 text-slate-600 rounded-2xl hover:from-teal-50 hover:to-purple-50 hover:text-purple-500 transition-all duration-300 hover:scale-110 hover:-translate-y-1 shadow-md hover:shadow-lg">
+                              <svg className="w-5 h-5 group-hover/fav:scale-125 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                              </svg>
+                            </button>
+                            </div>
+
+                            {/* Progress indicator */}
+                  <div className="mt-6 h-1 bg-slate-200 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full transform -translate-x-full group-hover:translate-x-0 transition-transform duration-1000 delay-300"
+                      style={{
+                        width: project.status === 'Completed' ? '100%' : '70%'
+                      }}
+                    ></div>
                   </div>
                 </div>
               </div>
@@ -294,31 +395,64 @@ export default function Projects() {
 
           {/* Empty State */}
           {!loading && filteredProjects.length === 0 && (
-            <div className="text-center py-16">
-              <div className="text-6xl mb-4">📝</div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">No Projects Found</h3>
-              <p className="text-gray-600 mb-6">No projects match the current filter. Try a different filter or add a new project.</p>
-              <button
-                onClick={handleAddProjectClick}
-                className="bg-gradient-to-r from-slate-700 to-blue-700 text-white px-6 py-3 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                Add Your First Project
-              </button>
+            <div className="text-center py-20">
+              <div className="relative mb-8">
+                {/* Animated empty state illustration */}
+                <div className="text-8xl mb-6 animate-bounce">📝</div>
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32 bg-gradient-to-r from-blue-200/20 to-purple-200/20 rounded-full animate-pulse"></div>
+              </div>
+              
+              <div className="max-w-md mx-auto">
+                <h3 className="text-3xl font-bold bg-gradient-to-r from-slate-800 via-indigo-700 to-purple-700 bg-clip-text text-transparent mb-4">
+                  No Projects Found
+                </h3>
+                <p className="text-slate-600 mb-8 text-lg leading-relaxed">
+                  {selectedFilter === 'All' 
+                    ? "It looks like there are no projects yet. Start by adding your first amazing project!"
+                    : `No projects match the "${selectedFilter}" filter. Try a different filter or add a new project.`
+                  }
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <button
+                    onClick={handleAddProjectClick}
+                    className="group relative bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-3xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-2 overflow-hidden"
+                  >
+                    {/* Button shimmer effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                    <span className="relative z-10 flex items-center gap-2">
+                      <svg className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                      Add Your First Project
+                    </span>
+                  </button>
+                  
+                  {selectedFilter !== 'All' && (
+                    <button
+                      onClick={() => setSelectedFilter('All')}
+                      className="px-6 py-3 bg-white/80 backdrop-blur-sm text-slate-600 border border-slate-200 rounded-2xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
+                    >
+                      View All Projects
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
           )}
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8 border-t border-gray-800">
+      <footer className="bg-slate-900 text-white py-8 border-t border-slate-800">
         <div className="container mx-auto text-center px-6">
-          <p className="text-gray-400">
+          <p className="text-slate-400">
             &copy; 2025 Janith S Viduranga. All Rights Reserved.
           </p>
           <div className="mt-4 flex justify-center space-x-6">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">LinkedIn</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">GitHub</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">Twitter</a>
+            <a href="#" className="text-slate-400 hover:text-white transition-colors">LinkedIn</a>
+            <a href="#" className="text-slate-400 hover:text-white transition-colors">GitHub</a>
+            <a href="#" className="text-slate-400 hover:text-white transition-colors">Twitter</a>
           </div>
         </div>
       </footer>

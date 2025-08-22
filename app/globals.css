@@ -19,3 +19,107 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Custom animations for skills page */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+/* Floating animation for skill cards */
+.skill-card-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.skill-card-float:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.skill-card-float:nth-child(3) {
+  animation-delay: 1s;
+}
+
+/* Project card floating animation */
+.project-card {
+  animation: float 4s ease-in-out infinite;
+}
+
+.project-card:nth-child(2n) {
+  animation-delay: 0.7s;
+}
+
+.project-card:nth-child(3n) {
+  animation-delay: 1.2s;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom hover effects */
+.skill-badge-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-badge-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.skill-badge-hover:hover::before {
+  left: 100%;
+}
