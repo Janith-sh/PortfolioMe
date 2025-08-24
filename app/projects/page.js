@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import AddProjectForm from "@/components/AddProjectsForm";
 import { projectAPI } from "@/utils/api";
 
@@ -81,10 +82,10 @@ export default function Projects() {
             Janith S Viduranga
           </h1>
           <div className="hidden md:flex space-x-8">
-            <a href="/" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Home</a>
-            <a href="/projects" className="text-indigo-600 font-semibold border-b-2 border-indigo-600">Projects</a>
-            <a href="/skills" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Skills</a>
-            <a href="/contact" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Contact</a>
+            <Link href="/" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Home</Link>
+            <Link href="/projects" className="text-indigo-600 font-semibold border-b-2 border-indigo-600">Projects</Link>
+            <Link href="/skills" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Skills</Link>
+            <Link href="/contact" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Contact</Link>
           </div>
           
           {/* Mobile menu button */}
@@ -342,7 +343,7 @@ export default function Projects() {
                     ))}
                   </div>
 
-                  /* Action Buttons with enhanced styling */
+                  
                             <div className="flex gap-3">
                             <a 
                               href={project.link}

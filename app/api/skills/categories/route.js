@@ -3,7 +3,7 @@ import connectToDatabase from '@/lib/mongodb';
 import SkillCategory from '@/models/Skill';
 
 // GET all categories (simplified list)
-export async function GET(request) {
+export async function GET() {
   try {
     await connectToDatabase();
 

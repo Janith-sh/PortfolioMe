@@ -1,5 +1,6 @@
 // pages/index.js
 import Image from "next/image";
+import Link from "next/link";
 import TypingText from "@/components/TypingText";
 
 export default function Home() {
@@ -12,10 +13,10 @@ export default function Home() {
             Janith S Viduranga
           </h1>
           <div className="hidden md:flex space-x-8">
-            <a href="/" className="text-indigo-600 font-semibold border-b-2 border-indigo-600">Home</a>
-            <a href="/projects" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Projects</a>
-            <a href="/skills" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Skills</a>
-            <a href="/contact" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Contact</a>
+            <Link href="/" className="text-indigo-600 font-semibold border-b-2 border-indigo-600">Home</Link>
+            <Link href="/projects" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Projects</Link>
+            <Link href="/skills" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Skills</Link>
+            <Link href="/contact" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Contact</Link>
           </div>
           
           {/* Mobile menu button */}
@@ -40,7 +41,7 @@ export default function Home() {
                   Hello! Welcome to my portfolio
                 </p>
                 <h1 className="text-5xl md:text-6xl font-bold text-slate-800 leading-tight animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-                  I'M{" "}
+                  I&apos;M{" "}
                     <span className="text-slate-800">
                     JANITH SHAN
                     </span>

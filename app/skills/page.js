@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { skillsAPI } from '@/utils/api';
 
 export default function Skills() {
@@ -145,10 +146,10 @@ export default function Skills() {
               Janith S Viduranga
             </h1>
             <div className="hidden md:flex space-x-8">
-              <a href="/" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Home</a>
-              <a href="/projects" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Projects</a>
-              <a href="/skills" className="text-indigo-600 font-semibold border-b-2 border-indigo-600">Skills</a>
-              <a href="/contact" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Contact</a>
+              <Link href="/" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Home</Link>
+              <Link href="/projects" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Projects</Link>
+              <Link href="/skills" className="text-indigo-600 font-semibold border-b-2 border-indigo-600">Skills</Link>
+              <Link href="/contact" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Contact</Link>
             </div>
             
             {/* Mobile menu button */}
@@ -310,7 +311,7 @@ export default function Skills() {
                         Always Learning
                       </h3>
                       <p className="text-slate-600 mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
-                        Technology evolves rapidly, and I'm committed to continuous learning and staying updated with the latest trends and best practices in web development.
+                        Technology evolves rapidly, and I&apos;m committed to continuous learning and staying updated with the latest trends and best practices in web development.
                       </p>
                       
                       <div className="flex flex-wrap justify-center gap-4">
