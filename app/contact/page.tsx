@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { contactAPI } from '@/utils/api';
 
 export default function Contact() {
@@ -112,10 +113,10 @@ export default function Contact() {
             Janith S Viduranga
           </h1>
           <div className="hidden md:flex space-x-8">
-            <a href="/" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Home</a>
-            <a href="/projects" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Projects</a>
-            <a href="/skills" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Skills</a>
-            <a href="/contact" className="text-indigo-600 font-semibold border-b-2 border-indigo-600">Contact</a>
+            <Link href="/" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Home</Link>
+            <Link href="/projects" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Projects</Link>
+            <Link href="/skills" className="text-slate-600 hover:text-indigo-600 transition-colors duration-300 font-medium">Skills</Link>
+            <Link href="/contact" className="text-indigo-600 font-semibold border-b-2 border-indigo-600">Contact</Link>
           </div>
           
           {/* Mobile menu button */}
@@ -138,8 +139,8 @@ export default function Contact() {
               Get In <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Touch</span>
             </h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              Have a project in mind or want to collaborate? I'd love to hear from you. 
-              Let's create something amazing together.
+              Have a project in mind or want to collaborate? I&apos;d love to hear from you. 
+              Let&apos;s create something amazing together.
             </p>
           </div>
 
@@ -157,7 +158,7 @@ export default function Contact() {
                     <div>
                       <strong>Thank you!</strong> Your message has been sent successfully.
                       <br />
-                      <small>I'll get back to you within 24-48 hours.</small>
+                      <small>I&apos;ll get back to you within 24-48 hours.</small>
                     </div>
                   </div>
                 </div>
@@ -304,7 +305,7 @@ export default function Contact() {
                   <h3 className="text-xl font-bold text-slate-800">Currently Available</h3>
                 </div>
                 <p className="text-slate-600 mb-4">
-                  I'm currently available for freelance projects and full-time opportunities.
+                  I&apos;m currently available for freelance projects and full-time opportunities.
                 </p>
                 <div className="text-sm text-slate-600 mb-6">
                   <p>• Response time: Within 24 hours</p>
