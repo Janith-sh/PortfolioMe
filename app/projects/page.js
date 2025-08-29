@@ -246,14 +246,9 @@ export default function Projects() {
 
           {/* Projects Grid */}
           {loading ? (
-            <div className="flex justify-center items-center py-20">
-              <div className="text-center">
-                <div className="relative">
-                  <div className="w-16 h-16 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mx-auto mb-4"></div>
-                  <div className="w-12 h-12 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin mx-auto mb-4 absolute top-2 left-1/2 transform -translate-x-1/2" style={{animationDirection: 'reverse', animationDuration: '1.5s'}}></div>
-                </div>
-                <p className="text-slate-600 font-medium animate-pulse">Loading amazing projects...</p>
-              </div>
+            <div className="flex justify-center items-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+              <span className="ml-4 text-slate-600">Loading projects...</span>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-8">
@@ -477,7 +472,7 @@ export default function Projects() {
               <h4 className="text-lg font-semibold text-white mb-4">Connect</h4>
               <div className="flex flex-wrap gap-3">
                 <a 
-                  href="https://github.com" 
+                  href="https://github.com/Janith-sh" 
                   className="group flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl px-4 py-2 transition-all duration-300 hover:transform hover:-translate-y-1"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -488,7 +483,7 @@ export default function Projects() {
                   <span className="text-xs font-medium text-slate-400 group-hover:text-white transition-colors">GitHub</span>
                 </a>
                 <a 
-                  href="https://linkedin.com" 
+                  href="https://www.linkedin.com/in/janith-sh" 
                   className="group flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl px-4 py-2 transition-all duration-300 hover:transform hover:-translate-y-1"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -499,7 +494,7 @@ export default function Projects() {
                   <span className="text-xs font-medium text-slate-400 group-hover:text-blue-400 transition-colors">LinkedIn</span>
                 </a>
                 <a 
-                  href="https://instagram.com" 
+                  href="https://www.instagram.com/janith_sh_/" 
                   className="group flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl px-4 py-2 transition-all duration-300 hover:transform hover:-translate-y-1"
                   target="_blank"
                   rel="noopener noreferrer"
