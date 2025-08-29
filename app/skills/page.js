@@ -558,7 +558,7 @@ export default function Skills() {
                 <h4 className="text-lg font-semibold text-white mb-4">Connect</h4>
                 <div className="flex flex-wrap gap-3">
                   <a 
-                    href="https://github.com" 
+                    href="https://github.com/Janith-sh" 
                     className="group flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl px-4 py-2 transition-all duration-300 hover:transform hover:-translate-y-1"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -569,7 +569,7 @@ export default function Skills() {
                     <span className="text-xs font-medium text-slate-400 group-hover:text-white transition-colors">GitHub</span>
                   </a>
                   <a 
-                    href="https://linkedin.com" 
+                    href="https://www.linkedin.com/in/janith-sh" 
                     className="group flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl px-4 py-2 transition-all duration-300 hover:transform hover:-translate-y-1"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -580,7 +580,7 @@ export default function Skills() {
                     <span className="text-xs font-medium text-slate-400 group-hover:text-blue-400 transition-colors">LinkedIn</span>
                   </a>
                   <a 
-                    href="https://instagram.com" 
+                    href="https://www.instagram.com/janith_sh_/" 
                     className="group flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl px-4 py-2 transition-all duration-300 hover:transform hover:-translate-y-1"
                     target="_blank"
                     rel="noopener noreferrer"
