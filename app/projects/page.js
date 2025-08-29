@@ -7,6 +7,7 @@ import AddProjectForm from "@/components/AddProjectsForm";
 import { projectAPI } from "@/utils/api";
 
 export default function Projects() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -90,13 +91,28 @@ export default function Projects() {
           
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <button className="text-slate-600 hover:text-indigo-600">
+            <button 
+              className="text-slate-600 hover:text-indigo-600"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
               </svg>
             </button>
           </div>
         </nav>
+
+        {/* Mobile menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-white/95 backdrop-blur-md border-b border-slate-200">
+            <div className="container mx-auto px-6 py-4 space-y-4">
+              <Link href="/" className="block text-slate-600 hover:text-indigo-600 transition-colors duration-300" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
+              <Link href="/projects" className="block text-indigo-600 font-semibold" onClick={() => setIsMobileMenuOpen(false)}>Projects</Link>
+              <Link href="/skills" className="block text-slate-600 hover:text-indigo-600 transition-colors duration-300" onClick={() => setIsMobileMenuOpen(false)}>Skills</Link>
+              <Link href="/contact" className="block text-slate-600 hover:text-indigo-600 transition-colors duration-300" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Main Content */}
